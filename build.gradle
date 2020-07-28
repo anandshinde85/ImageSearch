@@ -21,6 +21,79 @@ allprojects {
     }
 }
 
+ext {
+    // SDK
+    compileSdkVer = 28
+    targetSdkVer = 30
+    minSdkVer = 22
+
+    //Versions
+    ktx = '1.3.0'
+    androidx = '1.1.0'
+    cardview = '1.0.0'
+    constraintLayout = '1.1.3'
+    lifeCycleVersion = '2.2.0'
+    legacy = '1.0.0'
+
+    retrofit = '2.8.1'
+    okHttp = '4.4.1'
+    picasso = '2.71828'
+
+    roomVersion = '2.2.5'
+    safeRoomVersion = '1.3.0'
+
+    jUnit = '4.13'
+    jUnitExt = '4.13'
+    mockk = '1.10.0'
+    roboElectric = '4.3'
+    coreTest = '1.1.1'
+    coreKtxTest = '1.2.0'
+
+    //Support Libraries dependencies
+    supportDependencies = [
+            // Design
+            appCompat         : "androidx.appcompat:appcompat:${androidx}",
+            recyclerView      : "androidx.recyclerview:recyclerview:${androidx}",
+            cardView          : "androidx.cardview:cardview:${cardview}",
+            constraintLayout  : "androidx.constraintlayout:constraintlayout:${constraintLayout}",
+            legacySupport     : "androidx.legacy:legacy-support-v4:${legacy}",
+
+            // View model
+            viewModel         : "androidx.lifecycle:lifecycle-viewmodel-ktx:${lifeCycleVersion}",
+
+            // Live Data
+            liveData          : "androidx.lifecycle:lifecycle-livedata-ktx:${lifeCycleVersion}",
+
+            // Life cycle Extension
+            lifeCycleExtension: "androidx.lifecycle:lifecycle-extensions:${lifeCycleVersion}",
+
+            // Room
+            room              : "androidx.room:room-runtime:${roomVersion}",
+            roomCompiler      : "androidx.room:room-compiler:${roomVersion}",
+            roomCoroutine     : "androidx.room:room-ktx:${roomVersion}",
+            safeRoom          : "com.commonsware.cwac:saferoom.x:${safeRoomVersion}",
+
+            // Networking
+            retrofit          : "com.squareup.retrofit2:retrofit:${retrofit}",
+            okHttpLogger      : "com.squareup.okhttp3:logging-interceptor:${okHttp}",
+            okHttpDownloader  : "com.squareup.okhttp3:okhttp:${okHttp}",
+            gson              : "com.squareup.retrofit2:converter-gson:${retrofit}",
+            picasso           : "com.squareup.picasso:picasso:${picasso}",
+
+            // jUnit and other test suits
+            jUnit             : "junit:junit:${jUnit}",
+            jUnitExt          : "junit:junit:${jUnitExt}",
+            mockk             : "io.mockk:mockk:${mockk}",
+            roboElectric      : "org.robolectric:robolectric:${roboElectric}",
+            coreTest          : "android.arch.core:core-testing:${coreTest}",
+            coreKtxTest          : "androidx.test:core-ktx:${coreKtxTest}",
+
+            // Core
+            ktx               : "androidx.core:core-ktx:${ktx}",
+            ktLib             : "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
+    ]
+}
+
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
