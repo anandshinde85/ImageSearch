@@ -1,15 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 30
+    compileSdkVersion compileSdkVer
     buildToolsVersion "30.0.0"
 
     defaultConfig {
         applicationId "com.axxess.imagesearch"
-        minSdkVersion 16
-        targetSdkVersion 30
+        minSdkVersion minSdkVer
+        targetSdkVersion targetSdkVer
         versionCode 1
         versionName "1.0"
 
@@ -26,12 +27,34 @@ android {
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation supportDependencies.ktLib
+    implementation supportDependencies.ktx
 
+    // Design dependencies
+    implementation supportDependencies.appCompat
+    implementation supportDependencies.constraintLayout
+    implementation supportDependencies.legacySupport
+    implementation supportDependencies.recyclerView
+    implementation supportDependencies.cardView
+    implementation supportDependencies.lifeCycleExtension
+
+    // ViewModel and live data
+    implementation supportDependencies.liveData
+    implementation supportDependencies.viewModel
+
+    // Networking dependencies
+    implementation supportDependencies.retrofit
+    implementation supportDependencies.gson
+    implementation supportDependencies.okHttpDownloader
+    implementation supportDependencies.okHttpLogger
+    implementation supportDependencies.picasso
+
+    // Test suite dependencies
+    testImplementation supportDependencies.jUnit
+    testImplementation supportDependencies.roboElectric
+    testImplementation supportDependencies.coreTest
+    androidTestImplementation supportDependencies.jUnitExt
+    androidTestImplementation supportDependencies.coreKtxTest
+
+    kapt supportDependencies.roomCompiler
 }
