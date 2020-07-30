@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchParentPadded">
+
+    <Button
+        android:id="@+id/submitButton"
+        style="@style/WrapContentLayout"
+        android:text="@string/submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editComment"
+        style="@style/MatchConstraintWidthLayout"
+        android:layout_marginEnd="@dimen/spacing_m"
+        android:hint="@string/hint_comment"
+        app:layout_constraintEnd_toStartOf="@id/submitButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageDetail"
+        style="@style/WrapContentLayout"
+        android:layout_marginTop="@dimen/spacing_l"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/submitButton"
+        tools:src="@drawable/ic_views" />
+
+    <TextView
+        android:id="@+id/oldCommentTitle"
+        style="@style/MatchConstraintWidthLayout"
+        android:layout_marginTop="@dimen/spacing_l"
+        android:gravity="center"
+        android:text="@string/saved_comment"
+        android:textSize="@dimen/text_l"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageDetail" />
+
+    <TextView
+        android:id="@+id/oldComment"
+        style="@style/SectionLayout"
+        android:layout_marginTop="@dimen/spacing_l"
+        android:text="@string/saved_comment"
+        android:textSize="@dimen/text_m"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/oldCommentTitle" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

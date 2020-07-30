@@ -3,4 +3,7 @@
     <string name="default_error_message">Something went wrong, please try again later.</string>
     <string name="hint_search_images">Search images</string>
     <string name="no_views_available">0</string>
+    <string name="hint_comment">Enter a comment here</string>
+    <string name="submit">Submit</string>
+    <string name="saved_comment">Saved comment</string>
 </resources>

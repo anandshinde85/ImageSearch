@@ -1,5 +1,6 @@
 package com.axxess.imagesearch.imagesearch
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.widget.SearchView
@@ -13,6 +14,9 @@ import com.axxess.imagesearch.common.util.hideKeyboard
 import com.axxess.imagesearch.common.util.show
 import com.axxess.imagesearch.networking.imagesearch.ImageSearchResponse
 import com.axxess.imagesearch.networking.imagesearch.SearchResults
+import com.axxess.imagesearch.searchdetails.SearchDetailsActivity
+import com.axxess.imagesearch.searchdetails.SearchDetailsActivity.SEARCH_RESULTS_ARG
+import com.axxess.imagesearch.searchdetails.SearchDetailsActivity.SEARCH_STRING_ARG
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_image_search.*
 
@@ -98,7 +102,11 @@ class ImageSearchActivity : BaseActivity() {
     }
 
     private fun onSearchClick(searchResults: SearchResults) {
-
+        val searchDetailIntent = Intent(this, SearchDetailsActivity::class.java).apply {
+            putExtra(SEARCH_RESULTS_ARG, searchResults)
+            putExtra(SEARCH_STRING_ARG, searchText)
+        }
+        startActivity(searchDetailIntent)
     }
 
     private fun handleSearchResponse(resourceState: Resource<ImageSearchResponse?>?) {
