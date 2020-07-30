@@ -1,0 +1,60 @@
+package com.axxess.imagesearch.imagesearch
+
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
+import com.axxess.imagesearch.R
+import com.axxess.imagesearch.networking.imagesearch.SearchResults
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.search_result_item.view.*
+
+class ImageSearchAdapter(
+    private val searchResultsList: MutableList<SearchResults> = arrayListOf(),
+    private val onSearchItemClick: (seachResults: SearchResults) -> Unit = {}
+) :
+    RecyclerView.Adapter<ImageSearchAdapter.SearchResultHolder>() {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultHolder =
+        SearchResultHolder(
+            LayoutInflater.from(parent.context).inflate(
+                R.layout.search_result_item, parent, false
+            )
+        )
+
+    override fun getItemCount() = searchResultsList.size
+
+    override fun onBindViewHolder(holder: SearchResultHolder, position: Int) {
+        val searchResult = searchResultsList[position]
+        with(holder) {
+            imageTitle.text = searchResult.title
+            val image = searchResult.images?.firstOrNull()
+            image?.let {
+                image
+                Picasso.get().load(image.link).error(R.drawable.ic_download_error)
+                    .placeholder(R.drawable.ic_placeholder).fit()
+                    .into(searchImage)
+
+                image.views?.let { viewsLabel.text = it }
+            } ?: run {
+                Picasso.get().load(R.drawable.ic_placeholder).into(searchImage)
+                viewsLabel.text = "0"
+            }
+            itemView.setOnClickListener { onSearchItemClick(searchResult) }
+        }
+    }
+
+    inner class SearchResultHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageTitle: TextView = itemView.imageTitle
+        val searchImage: ImageView = itemView.searchImage
+        val viewsLabel: TextView = itemView.viewsLabel
+    }
+
+    fun updateDataSet(searchList: List<SearchResults>) = searchResultsList.run {
+        clear()
+        addAll(searchList)
+        notifyDataSetChanged()
+    }
+}

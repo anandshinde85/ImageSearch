@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Padding/Margin -->
+    <dimen name="screen_padding_default">24dp</dimen>
+    <dimen name="grid_image_width">160dp</dimen>
+    <dimen name="grid_image_height">160dp</dimen>
+    <dimen name="spacing_s">8dp</dimen>
+    <dimen name="spacing_m">16dp</dimen>
+    <dimen name="spacing_l">24dp</dimen>
+    <dimen name="spacing_xl">32dp</dimen>
+    <dimen name="text_l">22sp</dimen>
+    <dimen name="text_m">14sp</dimen>
+    <dimen name="zero_dp">0dp</dimen>
+    <dimen name="error_text_size">25sp</dimen>
+    <integer name="grid_columns">2</integer>
+</resources>

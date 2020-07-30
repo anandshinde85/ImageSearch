@@ -19,15 +19,33 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.imgur.com/\"")
+            buildConfigField("String", "AUTHORIZATION_KEY", "\"Authorization\"")
+            buildConfigField("String", "AUTHORIZATION_VALUE", "\"Client-ID 137cda6b5008a7c\"")
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", "\"https://api.imgur.com/\"")
+            buildConfigField("String", "AUTHORIZATION_KEY", "\"Authorization\"")
+            buildConfigField("String", "AUTHORIZATION_VALUE", "\"Client-ID 137cda6b5008a7c\"")
         }
     }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+}
+
+allprojects {
+    repositories {
+        maven { url "https://s3.amazonaws.com/repo.commonsware.com" }
     }
 }
 
@@ -47,6 +65,8 @@ dependencies {
     // ViewModel and live data
     implementation supportDependencies.liveData
     implementation supportDependencies.viewModel
+    implementation supportDependencies.lifeCycleExtension
+    implementation supportDependencies.activityKtx
 
     // DI using hilt
     implementation supportDependencies.hilt
@@ -58,6 +78,11 @@ dependencies {
     implementation supportDependencies.okHttpDownloader
     implementation supportDependencies.okHttpLogger
     implementation supportDependencies.picasso
+
+    // Room
+    implementation supportDependencies.room
+    implementation supportDependencies.roomCoroutine
+    implementation supportDependencies.safeRoom
 
     // Test suite dependencies
     testImplementation supportDependencies.jUnit

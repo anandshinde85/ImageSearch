@@ -7,4 +7,42 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="WrapContentLayout">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchConstraintWidthLayout">
+        <item name="android:layout_width">@dimen/zero_dp</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchConstraintLayout">
+        <item name="android:layout_width">@dimen/zero_dp</item>
+        <item name="android:layout_height">@dimen/zero_dp</item>
+    </style>
+
+    <style name="MatchParentLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="MatchParentLayout.ScreenPadded">
+        <item name="android:paddingRight">@dimen/screen_padding_default</item>
+    </style>
+
+    <style name="MatchParentPadded" parent="MatchParentLayout">
+        <item name="android:padding">@dimen/screen_padding_default</item>
+    </style>
+
+    <style name="SectionLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="SectionLayout.ScreenPadded">
+        <item name="android:paddingLeft">@dimen/screen_padding_default</item>
+        <item name="android:paddingRight">@dimen/screen_padding_default</item>
+    </style>
+
 </resources>
