@@ -2,5 +2,7 @@
 <resources>
     <dimen name="grid_image_width">350dp</dimen>
     <dimen name="grid_image_height">350dp</dimen>
+    <dimen name="detail_image_width">500dp</dimen>
+    <dimen name="detail_image_height">520dp</dimen>
     <integer name="grid_columns">4</integer>
 </resources>
