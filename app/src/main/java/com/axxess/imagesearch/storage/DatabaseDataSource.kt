@@ -10,7 +10,7 @@ import javax.inject.Singleton
 @Singleton
 open class DatabaseDataSource @Inject constructor(val gson: Gson, val baseDatabase: BaseDatabase) {
 
-    fun save(key: String, data: CacheableResponse) {
+    suspend fun save(key: String, data: CacheableResponse) {
         val value = gson.toJson(data)
 
         val cacheData = ApiCache(
@@ -21,7 +21,7 @@ open class DatabaseDataSource @Inject constructor(val gson: Gson, val baseDataba
         baseDatabase.apiCacheDao().save(cacheData)
     }
 
-    inline fun <reified T : CacheableResponse> find(
+    suspend inline fun <reified T : CacheableResponse> find(
         key: String,
         cacheTime: CacheTime = CacheTime.LONG
     ): T? {
@@ -36,7 +36,7 @@ open class DatabaseDataSource @Inject constructor(val gson: Gson, val baseDataba
         return null
     }
 
-    fun deleteByKey(key: String) {
+    suspend fun deleteByKey(key: String) {
         baseDatabase.apiCacheDao().deleteByKey(getPrefixForKey(key))
     }
 

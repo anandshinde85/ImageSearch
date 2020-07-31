@@ -8,17 +8,17 @@ import com.axxess.imagesearch.storage.DateConverter
 interface ApiCacheDao {
 
     @Query("SELECT * FROM $API_CACHE_TABLE_NAME where key = :key")
-    fun findByKey(key: String): ApiCache?
+    suspend fun findByKey(key: String): ApiCache?
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun save(apiCache: ApiCache)
+    suspend fun save(apiCache: ApiCache)
 
     @Query("DELETE FROM $API_CACHE_TABLE_NAME")
-    fun delete()
+    suspend fun delete()
 
     @Query("DELETE FROM $API_CACHE_TABLE_NAME where key = :key")
-    fun deleteByKey(key: String)
+    suspend fun deleteByKey(key: String)
 
     @Query("DELETE FROM $API_CACHE_TABLE_NAME WHERE key LIKE :key")
-    fun deleteCampaignCache(key: String)
+    suspend fun deleteCampaignCache(key: String)
 }
