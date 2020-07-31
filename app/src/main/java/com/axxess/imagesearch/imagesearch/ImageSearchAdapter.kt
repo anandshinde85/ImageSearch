@@ -7,8 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.axxess.imagesearch.R
+import com.axxess.imagesearch.common.util.loadImage
 import com.axxess.imagesearch.networking.imagesearch.SearchResults
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.search_result_item.view.*
 
 class ImageSearchAdapter(
@@ -32,16 +32,10 @@ class ImageSearchAdapter(
             imageTitle.text = searchResult.title
             val image = searchResult.images?.firstOrNull()
             image?.let {
-                image
-                Picasso.get().load(image.link).error(R.drawable.ic_download_error)
-                    .placeholder(R.drawable.ic_placeholder).fit()
-                    .into(searchImage)
+                searchImage.loadImage(it.link)
+                it.views?.let { this.viewsLabel.text = it } ?: run { setNoViewsFound(viewsLabel) }
+            } ?: run { setNoViewsFound(viewsLabel) }
 
-                image.views?.let { viewsLabel.text = it }
-            } ?: run {
-                Picasso.get().load(R.drawable.ic_placeholder).into(searchImage)
-                viewsLabel.text = "0"
-            }
             itemView.setOnClickListener { onSearchItemClick(searchResult) }
         }
     }
@@ -57,4 +51,7 @@ class ImageSearchAdapter(
         addAll(searchList)
         notifyDataSetChanged()
     }
+
+    private fun setNoViewsFound(textView: TextView) =
+        textView.run { text = textView.context.getString(R.string.no_views_available) }
 }
