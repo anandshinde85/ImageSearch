@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.axxess.imagesearch.common.util.DateFormat
 import com.axxess.imagesearch.common.util.GsonUTCDateAdapter
-import com.axxess.imagesearch.storage.BaseDatabase
-import com.axxess.imagesearch.storage.DatabaseDataSource
 import com.axxess.imagesearch.storage.database.AppDatabase
 import com.axxess.imagesearch.storage.database.DATABASE_NAME
 import com.google.gson.Gson
@@ -31,11 +29,6 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideBaseDatabase(@ApplicationContext context: Context): BaseDatabase =
+    fun provideAppDatabase(@ApplicationContext context: Context): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
-
-    @Singleton
-    @Provides
-    fun provideDataSource(gson: Gson, baseDatabase: BaseDatabase): DatabaseDataSource =
-        DatabaseDataSource(gson, baseDatabase)
 }
