@@ -25,7 +25,8 @@ class ImageSearchActivity : BaseActivity() {
 
     companion object {
         private const val SEARCH_TEXT = "search_text"
-        private const val SEARCH_CHAR_THRESHOLD = 3
+        private const val SEARCH_CHAR_THRESHOLD =
+            3 // To be used when we have to search items as and when user types
     }
 
     private var searchText: String? = null
@@ -77,13 +78,6 @@ class ImageSearchActivity : BaseActivity() {
         setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextChange(newText: String): Boolean {
                 searchText = newText
-                when (newText.length) {
-                    in 0..SEARCH_CHAR_THRESHOLD -> {
-                    } // Do nothing
-                    else -> {
-                        searchImages(newText)
-                    }
-                }
                 return false
             }
 
@@ -142,6 +136,7 @@ class ImageSearchActivity : BaseActivity() {
      */
     override fun showLoading() {
         searchGrid.hide()
+        errorInfo.hide()
         progressbar.show()
     }
 
