@@ -1,10 +1,9 @@
 package com.axxess.imagesearch.common.ui
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.axxess.imagesearch.R
-import com.axxess.imagesearch.common.util.hide
-import com.axxess.imagesearch.common.util.show
 import kotlinx.android.synthetic.main.base_activity.*
 
 /**
@@ -16,12 +15,19 @@ import kotlinx.android.synthetic.main.base_activity.*
  * @author Anand Shinde
  */
 abstract class BaseActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.base_activity)
         contentFrame.addView(layoutInflater.inflate(getLayoutResourceId(), null))
         setUpUI()
     }
+
+    /**
+     * Method to display long toast messages
+     * @param - message to be displayed in toast
+     */
+    protected fun displayToast(message: String) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 
     /**
      * Method to display screen content
