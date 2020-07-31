@@ -3,12 +3,14 @@ package com.axxess.imagesearch.storage
 import com.anand.mvvmskeletonarchitecture.storage.ApiCache
 import com.axxess.imagesearch.networking.CacheTime
 import com.axxess.imagesearch.networking.CacheableResponse
+import com.axxess.imagesearch.storage.comments.Comment
+import com.axxess.imagesearch.storage.database.AppDatabase
 import com.google.gson.Gson
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-open class DatabaseDataSource @Inject constructor(val gson: Gson, val baseDatabase: BaseDatabase) {
+open class DatabaseDataSource @Inject constructor(val gson: Gson, val appDatabase: AppDatabase) {
 
     suspend fun save(key: String, data: CacheableResponse) {
         val value = gson.toJson(data)
@@ -18,14 +20,14 @@ open class DatabaseDataSource @Inject constructor(val gson: Gson, val baseDataba
             value,
             data.javaClass.simpleName
         )
-        baseDatabase.apiCacheDao().save(cacheData)
+        appDatabase.apiCacheDao().save(cacheData)
     }
 
     suspend inline fun <reified T : CacheableResponse> find(
         key: String,
         cacheTime: CacheTime = CacheTime.LONG
     ): T? {
-        val cache = baseDatabase.apiCacheDao().findByKey(getPrefixForKey(key))
+        val cache = appDatabase.apiCacheDao().findByKey(getPrefixForKey(key))
 
         if (cache != null) {
             val cachable = gson.fromJson(cache.value, T::class.java)
@@ -37,7 +39,7 @@ open class DatabaseDataSource @Inject constructor(val gson: Gson, val baseDataba
     }
 
     suspend fun deleteByKey(key: String) {
-        baseDatabase.apiCacheDao().deleteByKey(getPrefixForKey(key))
+        appDatabase.apiCacheDao().deleteByKey(getPrefixForKey(key))
     }
 
     /**
@@ -45,4 +47,17 @@ open class DatabaseDataSource @Inject constructor(val gson: Gson, val baseDataba
      * in same app can have multiple cached key response
      */
     fun getPrefixForKey(key: String) = key
+
+    /**
+     * Function to save comments
+     * @param comment - Comment to be stored in database
+     */
+    suspend fun saveComment(comment: Comment) =
+        appDatabase.commentsDao().save(comment)
+
+    /**
+     * Function to get saved comments
+     * @param id - id of comment saved
+     */
+    suspend fun getComment(id: String) = appDatabase.commentsDao().findComment(id)
 }
