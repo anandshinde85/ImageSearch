@@ -1,3 +1,5 @@
+@file:JvmName("Utility")
+
 package com.axxess.imagesearch.common.util
 
 import android.app.Activity
@@ -35,7 +37,10 @@ fun Activity.hideKeyboard() {
 
 fun Activity.showKeyboard() {
     val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY)
+    inputMethodManager.toggleSoftInput(
+        InputMethodManager.SHOW_FORCED,
+        InputMethodManager.HIDE_IMPLICIT_ONLY
+    )
 }
 
 fun getProgressDrawable(context: Context): CircularProgressDrawable {
